@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usabilidad y Accesibilidad | SENA</title>
+
+<style>
+:root {
+    --verde: #00843D;
+    --verde-oscuro: #006B32;
+    --verde-claro: #E8F5EC;
+    --blanco: #FFFFFF;
+    --fondo: #F3F7F4;
+    --texto: #24352B;
+    --borde: #D5E5D9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--verde);
+    color: white;
+    padding: 24px 30px;
+    border-bottom: 5px solid #B7DDBF;
+}
+
+.encabezado {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.logo {
+    width: 66px;
+    height: 66px;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.sidebar, .tarjeta {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 80, 30, 0.06);
+}
+
+.sidebar {
+    padding: 22px;
+}
+
+.sidebar h2 {
+    color: var(--verde-oscuro);
+    font-size: 18px;
+    margin: 0 0 8px;
+}
+
+.datos {
+    font-size: 13px;
+    color: #526357;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--borde);
+    overflow-wrap: anywhere;
+}
+
+.menu {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.btn-nav {
+    width: 100%;
+    padding: 13px;
+    background: white;
+    color: var(--verde-oscuro);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-nav:hover, .btn-nav:focus-visible {
+    background: var(--verde-claro);
+    outline: 2px solid var(--verde);
+    outline-offset: 2px;
+}
+
+.btn-nav.active {
+    background: var(--verde);
+    color: white;
+    border-color: var(--verde);
+}
+
+main {
+    min-width: 0;
+    display: grid;
+    gap: 20px;
+}
+
+.tarjeta {
+    padding: 26px;
+    min-width: 0;
+}
+
+.etiqueta {
+    display: inline-block;
+    color: var(--verde-oscuro);
+    background: var(--verde-claro);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h2, h3 {
+    color: var(--verde-oscuro);
+}
+
+#panel-titulo {
+    margin: 0;
+    font-size: 25px;
+    line-height: 1.3;
+}
+
+#seccion-subtitulo {
+    border-bottom: 2px solid var(--verde-claro);
+    padding-bottom: 12px;
+    margin-top: 0;
+}
+
+.viewer-box {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.viewer-box p {
+    margin: 12px 0;
+}
+
+.tech-node {
+    background: #F8FBF8;
+    border: 1px solid var(--borde);
+    border-left: 5px solid var(--verde);
+    padding: 16px;
+    border-radius: 8px;
+    margin: 14px 0;
+}
+
+.tech-node strong {
+    display: block;
+    color: var(--verde-oscuro);
+    margin-bottom: 5px;
+}
+
+.tech-node p {
+    margin: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid var(--borde);
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: var(--verde);
+    color: white;
+}
+
+tr:nth-child(even) td {
+    background: #F3F9F4;
+}
+
+.arch-display {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.arch-column {
+    border: 1px solid var(--borde);
+    background: #F8FBF8;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.arch-column h4 {
+    color: var(--verde-oscuro);
+    margin: 0 0 12px;
+}
+
+.arch-component {
+    background: var(--verde-claro);
+    border: 1px solid #B9DCC2;
+    padding: 10px 5px;
+    border-radius: 6px;
+    margin: 8px 0;
+    font-size: 13px;
+}
+
+.flecha {
+    color: var(--verde);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nota {
+    border-top: 1px solid var(--borde);
+    margin-top: 24px;
+    padding-top: 14px;
+    color: #526357;
+    font-size: 13px;
+}
+
+footer {
+    text-align: center;
+    background: #E5F1E8;
+    color: #355840;
+    padding: 20px;
+    font-size: 13px;
+    margin-top: 30px;
+}
+
+@media (max-width: 800px) {
+    .contenedor {
+        grid-template-columns: 1fr;
+        margin-top: 16px;
+        padding: 0 12px;
+    }
+
+    .sidebar {
+        padding: 16px;
+    }
+
+    .menu {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tarjeta {
+        padding: 18px;
+    }
+
+    .arch-display {
+        grid-template-columns: 1fr;
+    }
+
+    .tabla-contenedor {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+    header {
+        padding: 20px 14px;
+    }
+
+    header h1 {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 420px) {
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .logo {
+        width: 52px;
+        height: 52px;
+        font-size: 20px;
+    }
+
+    #panel-titulo {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="encabezado">
+        <div class="logo" aria-label="Identificador visual del proyecto">S</div>
+        <div>
+            <h1>Usabilidad y Accesibilidad</h1>
+            <p>Actividad formativa · Tecnología y desarrollo de software</p>
+        </div>
+    </div>
+</header>
+
+<div class="contenedor">
+
+    <aside class="sidebar">
+        <h2>Panel de aprendizaje</h2>
+        <p class="datos">
+            <strong>Aprendiz:</strong> Luis David Silgado Miranda<br>
+            <strong>Ficha:</strong> 3465982<br>
+            <strong>Evidencia:</strong> GA5-220501095-AA1-EV02
+        </p>
+
+        <nav class="menu" aria-label="Secciones de la actividad">
+            <button class="btn-nav active" data-seccion="1" aria-current="page">
+                1. Reglas de usabilidad
+            </button>
+            <button class="btn-nav" data-seccion="2">
+                2. Reglas de accesibilidad
+            </button>
+            <button class="btn-nav" data-seccion="3">
+                3. Comparativa de aplicaciones
+            </button>
+            <button class="btn-nav" data-seccion="4">
+                4. Diagrama de arquitectura
+            </button>
+        </nav>
+    </aside>
+
+    <main>
+        <section class="tarjeta">
+            <span class="etiqueta">ACTIVIDAD SENA</span>
+            <h2 id="panel-titulo">1. Reglas de Usabilidad</h2>
+            <p>
+                En esta actividad se estudian principios para diseñar
+                aplicaciones fáciles de comprender, utilizar y mantener.
+            </p>
+        </section>
+
+        <section class="tarjeta">
+            <h3 id="seccion-subtitulo">Principios heurísticos de Jakob Nielsen</h3>
+            <div class="viewer-box" id="contenido-dinamico" aria-live="polite">
+                <p>Cargando contenido...</p>
+            </div>
+        </section>
+    </main>
+
+</div>
+
+<footer>
+    Proyecto académico de usabilidad, accesibilidad y arquitectura de software.
+    <br>Servicio Nacional de Aprendizaje — SENA.
+</footer>
+
+<script>
+const secciones = {
+    1: {
+        titulo: "1. Reglas de Usabilidad",
+        subtitulo: "Principios heurísticos de Jakob Nielsen",
+        contenido: `
+            <p>
+                La usabilidad permite evaluar qué tan fácil resulta para
+                una persona aprender a utilizar un sistema y realizar sus tareas.
+                Una aplicación usable debe ser clara, eficiente y fácil de recordar.
+            </p>
+
+            <div class="tech-node">
+                <strong>1. Visibilidad del estado del sistema</strong>
+                La aplicación debe informar al usuario lo que está sucediendo.
+                <p><b>Ejemplo:</b> mostrar un mensaje como "Guardando información"
+                o "Registro completado".</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>2. Relación entre el sistema y el mundo real</strong>
+                Utilizar palabras familiares y evitar tecnicismos innecesarios.
+                <p><b>Ejemplo:</b> escribir "Guardar cambios" en lugar de
+                utilizar términos técnicos difíciles de entender.</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>3. Control y libertad del usuario</strong>
+                Ofrecer opciones para cancelar una acción o regresar cuando
+                se comete un error.
+                <p><b>Ejemplo:</b> permitir corregir un formulario antes de enviarlo.</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>4. Consistencia y estándares</strong>
+                Mantener los mismos estilos, colores y comportamientos
+                en los botones y menús.
+                <p><b>Ejemplo:</b> utilizar el mismo diseño para todos los botones
+                de guardar.</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>5. Prevención y recuperación de errores</strong>
+                Evitar equivocaciones y explicar cómo solucionarlas.
+                <p><b>Ejemplo:</b> indicar que un campo obligatorio está vacío.</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>6. Diseño claro y minimalista</strong>
+                Presentar la información necesaria sin saturar la pantalla.
+                <p><b>Ejemplo:</b> organizar la página mediante títulos,
+                secciones y espacios adecuados.</p>
+            </div>
+
+            <p><b>Conclusión:</b> una buena usabilidad mejora la experiencia
+            del usuario, reduce errores y facilita el aprendizaje del sistema.</p>
+        `
+    },
+
+    2: {
+        titulo: "2. Reglas de Accesibilidad",
+        subtitulo: "Principios WCAG: POUR",
+        contenido: `
+            <p>
+                La accesibilidad web busca que las personas, incluidas aquellas
+                con discapacidad, puedan percibir, comprender y utilizar
+                una página web.
+            </p>
+
+            <div class="tech-node">
+                <strong>1. Perceptible</strong>
+                La información debe presentarse de manera que las personas
+                puedan percibirla.
+                <p><b>Ejemplo:</b> agregar textos alternativos a las imágenes,
+                subtítulos a los videos y buen contraste entre texto y fondo.</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>2. Operable</strong>
+                Los controles y la navegación deben poder utilizarse
+                de distintas maneras.
+                <p><b>Ejemplo:</b> permitir navegar por los botones utilizando
+                la tecla Tab y activarlos con Enter.</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>3. Comprensible</strong>
+                Los textos, las instrucciones y el funcionamiento deben
+                resultar claros y predecibles.
+                <p><b>Ejemplo:</b> mostrar un mensaje que explique cómo corregir
+                un correo electrónico escrito incorrectamente.</p>
+            </div>
+
+            <div class="tech-node">
+                <strong>4. Robusto</strong>
+                El contenido debe ser compatible con navegadores y tecnologías
+                de asistencia.
+                <p><b>Ejemplo:</b> utilizar HTML semántico y etiquetas apropiadas
+                para facilitar la interpretación por lectores de pantalla.</p>
+            </div>
+
+            <h3>Recomendaciones prácticas</h3>
+            <ul>
+                <li>Usar textos legibles y un tamaño adecuado.</li>
+                <li>No comunicar errores solamente mediante colores.</li>
+                <li>Identificar claramente los campos de los formularios.</li>
+                <li>Permitir la navegación mediante teclado.</li>
+                <li>Verificar el contraste y el texto alternativo de las imágenes.</li>
+            </ul>
+
+            <p><b>Conclusión:</b> una página accesible facilita el acceso
+            a la información y promueve la inclusión digital.</p>
+        `
+    },
+
+    3: {
+        titulo: "3. Comparativa de Aplicaciones",
+        subtitulo: "Aplicaciones de escritorio y aplicaciones web",
+        contenido: `
+            <p>
+                Las aplicaciones pueden ejecutarse directamente en un computador
+                o utilizar un navegador para acceder a servicios disponibles
+                en internet. Cada alternativa tiene ventajas y limitaciones.
+            </p>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Aplicación de escritorio</th>
+                            <th>Aplicación web</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Instalación</b></td>
+                            <td>Generalmente requiere instalar un programa.</td>
+                            <td>Normalmente se accede mediante un navegador.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Recursos</b></td>
+                            <td>Utiliza los recursos del equipo local.</td>
+                            <td>Puede utilizar recursos del equipo y servidores remotos.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Actualizaciones</b></td>
+                            <td>Pueden requerir una actualización instalada.</td>
+                            <td>Los cambios del servidor pueden estar disponibles
+                            para los usuarios sin instalar una nueva versión.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Conectividad</b></td>
+                            <td>Puede funcionar sin internet si admite uso sin conexión.</td>
+                            <td>Muchas necesitan internet, aunque algunas admiten
+                            funciones sin conexión.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Ejemplo</b></td>
+                            <td>Una aplicación de edición instalada en el computador.</td>
+                            <td>Un sistema de gestión consultado desde el navegador.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tech-node">
+                <strong>Ventajas de las aplicaciones de escritorio</strong>
+                Pueden ofrecer buen rendimiento y trabajar sin conexión,
+                dependiendo de sus características.
+            </div>
+
+            <div class="tech-node">
+                <strong>Ventajas de las aplicaciones web</strong>
+                Facilitan el acceso desde diferentes dispositivos y permiten
+                centralizar información y actualizaciones.
+            </div>
+
+            <p><b>Conclusión:</b> la elección depende de las necesidades
+            del usuario, la conectividad, la seguridad, el rendimiento
+            y los recursos disponibles.</p>
+        `
+    },
+
+    4: {
+        titulo: "4. Diagrama de Arquitectura",
+        subtitulo: "Componentes de una aplicación web",
+        contenido: `
+            <p>
+                La arquitectura de software describe cómo se organizan
+                los componentes de una aplicación y cómo se comunican
+                para ofrecer sus funciones.
+            </p>
+
+            <div class="arch-display">
+                <div class="arch-column">
+                    <h4>1. Presentación</h4>
+                    <div class="arch-component">HTML</div>
+                    <div class="arch-component">CSS</div>
+                    <div class="arch-component">JavaScript</div>
+                    <p>Interfaz que utiliza el usuario.</p>
+                </div>
+
+                <div class="arch-column">
+                    <h4>2. Lógica del servidor</h4>
+                    <div class="arch-component">Procesamiento</div>
+                    <div class="arch-component">Reglas del negocio</div>
+                    <div class="arch-component">Validaciones</div>
+                    <p>Procesa solicitudes y aplica reglas.</p>
+                </div>
+
+                <div class="arch-column">
+                    <h4>3. Datos</h4>
+                    <div class="arch-component">Base de datos</div>
+                    <div class="arch-component">Consultas</div>
+                    <div class="arch-component">Registros</div>
+                    <p>Almacena y recupera información.</p>
+                </div>
+            </div>
+
+            <p class="flecha">
+                Usuario → Presentación → Servidor → Base de datos
+            </p>
+
+            <div class="tech-node">
+                <strong>Componente 1: Presentación</strong>
+                Es la parte visual con la que interactúa el usuario.
+                Incluye textos, formularios, botones y menús.
+            </div>
+
+            <div class="tech-node">
+                <strong>Componente 2: Lógica del servidor</strong>
+                Recibe solicitudes, valida información y ejecuta las operaciones
+                necesarias. No todas las aplicaciones web utilizan un servidor
+                propio para toda su lógica.
+            </div>
+
+            <div class="tech-node">
+                <strong>Componente 3: Base de datos</strong>
+                Permite almacenar, consultar, modificar y organizar
+                la información de la aplicación.
+            </div>
+
+            <h3>Ejemplo de funcionamiento</h3>
+            <ol>
+                <li>El usuario llena un formulario.</li>
+                <li>La interfaz envía la solicitud al servidor.</li>
+                <li>El servidor valida la información.</li>
+                <li>Si corresponde, consulta o guarda datos en la base de datos.</li>
+                <li>El sistema devuelve una respuesta a la interfaz.</li>
+            </ol>
+
+            <p><b>Conclusión:</b> organizar una aplicación por componentes
+            facilita su mantenimiento, comprensión y evolución.</p>
+        `
+    }
+};
+
+function cambiarSeccion(id) {
+    const seccion = secciones[id];
+
+    if (!seccion) {
+        return;
+    }
+
+    document.getElementById("panel-titulo").textContent = seccion.titulo;
+    document.getElementById("seccion-subtitulo").textContent = seccion.subtitulo;
+    document.getElementById("contenido-dinamico").innerHTML = seccion.contenido;
+
+    document.querySelectorAll(".btn-nav").forEach(function(boton) {
+        const seleccionado = Number(boton.dataset.seccion) === id;
+
+        boton.classList.toggle("active", seleccionado);
+
+        if (seleccionado) {
+            boton.setAttribute("aria-current", "page");
+        } else {
+            boton.removeAttribute("aria-current");
+        }
+    });
+}
+
+document.querySelectorAll(".btn-nav").forEach(function(boton) {
+    boton.addEventListener("click", function() {
+        cambiarSeccion(Number(this.dataset.seccion));
+    });
+});
+
+cambiarSeccion(1);
+</script>
+
+</body>
+</html>
